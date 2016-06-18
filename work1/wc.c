@@ -1,12 +1,26 @@
 #include <stdio.h>
 #include <wctype.h>
 
+#define INIT_COUNTER(X) \
+  Counter X; \
+  X.linecount = 0; \
+  X.charcount = 0; \
+  X.wordcount = 0;
+
+typedef struct {
+  int linecount;
+  int wordcount;
+  int charcount;
+  int status; // 0, 1
+} Counter;
+
 int readFromStdInput();
 int readFromFile(char *);
-int formatOutPut(int, int, int, char *);
+int formatOutPut(Counter *, char *);
+int counting(Counter *, char);
 
 int main (int argc, char *argv[]) {
-  if (argc == 0) {
+  if (argc == 1) {
     readFromStdInput();
   } else {
     char *filename = argv[1];
@@ -16,7 +30,12 @@ int main (int argc, char *argv[]) {
 }
 
 int readFromStdInput () {
-  printf("FUCK\n");
+  char c;
+  INIT_COUNTER(counter)
+  while (scanf("%c", &c) != EOF) {
+    counting(&counter, c);
+  }
+  formatOutPut(&counter, "");
   return 0;
 }
 
@@ -26,29 +45,32 @@ int readFromFile (char *filename) {
   if (fp == NULL) {
     printf("%s file doesn't no exist.\n", filename);
   }
-  char c; /* read char from file */
-  int wordcount = 0; /* words count */
-  int linecount = 0;
-  int charcount = 0;
-  int in_word = 0; /* if has started check for word */
+  char c;
+  INIT_COUNTER(counter);
   while (fscanf(fp, "%c", &c) != EOF) {
-    if (iswspace(c)) {
-      if (in_word) {
-        wordcount++;
-      }
-      if (c == '\n') {
-        linecount++;
-      }
-      in_word = 0;
-    } else {
-      in_word = 1;
-    }
-    charcount++;
+    counting(&counter, c);
   }
+  formatOutPut(&counter, filename);
   return 0;
 }
 
-int formatOutPut(int linecount, int wordcount, int charcount, char *filename) {
-  printf("%d\t%d\t%d\t%s\n", linecount, wordcount, charcount, filename);
+int counting (Counter *counter, char c) {
+    if (iswspace(c)) {
+      if (counter->status) {
+        counter->wordcount++;
+      }
+      if (c == '\n') {
+        counter->linecount++;
+      }
+      counter->status = 0;
+    } else {
+      counter->status = 1;
+    }
+    counter->charcount++;
+    return 0;
+}
+
+int formatOutPut(Counter *counter, char *filename) {
+  printf("%d\t%d\t%d\t%s\n", counter->linecount, counter->wordcount, counter->charcount, filename);
   return 0;
 }
