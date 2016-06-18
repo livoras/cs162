@@ -6,4 +6,4 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 CGLAGS	Makefile	/^CGLAGS=-Wall -g$/;"	m
 main	main.c	/^int main() {$/;"	f
-main	wc.c	/^int main () {$/;"	f
+main	wc.c	/^int main (int argc, char *argv[]) {$/;"	f
