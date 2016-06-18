@@ -1,5 +1,7 @@
 CGLAGS=-Wall -g
 
+all: wc
+
 clean:
 	rm -f main
 	rm -f wc
