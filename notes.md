@@ -25,6 +25,8 @@ int *ptra = &a; // 0x000
 ptra += 1; // 0x001
 ```
 
+This can answer the question of why 32-bit system support memory less than 4GB. This because CPU only use 32 bits to identify all bytes in memory, 2 ^ 32 bytes is 4GB.
+
 ### Stack frames
 
 Functions are implemented by `stack frames`, which is a section of memory storing execution information and data of function calls. And `stack frames` interacts with CPU registers to complete certain kind of computation.
