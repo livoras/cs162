@@ -24,3 +24,9 @@ int a = 3;
 int *ptra = &a; // 0x000
 ptra += 1; // 0x001
 ```
+
+### Stack frames
+
+Functions are implemented by `stack frames`, which is a section of memory storing execution information and data of function calls. And `stack frames` interacts with CPU registers to complete certain kind of computation.
+
+https://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Mips/stack.html
