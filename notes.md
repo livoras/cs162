@@ -32,3 +32,32 @@ This can answer the question of why 32-bit system support memory less than 4GB. 
 Functions are implemented by `stack frames`, which is a section of memory storing execution information and data of function calls. And `stack frames` interacts with CPU registers to complete certain kind of computation.
 
 https://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Mips/stack.html
+
+### Memory segments
+A program's memory is made up of four kind of segments.
+
+1. code segment
+2. data segment
+3. heap segment
+4. stack segment
+
+```
++-----------+
+|           |
+|   text    | (fixed size)
+|           |
++-----------+
+|           |
+|   data    | (fixed size)
+|           |
++-----------+
+|   stack   | | growth
++-----------+ V
+|           |
+|   free    |
+|           |
++-----------+ ^
+|   heap    | | growth
++-----------+
+```
+Refs: http://www.cs.uwm.edu/classes/cs315/Bacon/Lecture/HTML/ch10s04.html
