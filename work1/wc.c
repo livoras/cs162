@@ -22,8 +22,13 @@ int formatOutPut(Counter *, char *);
 int counting(Counter *, char);
 
 int main (int argc, char *argv[]) {
-  main_func mainPointer = &main;
-  printf("Address of Main function is %p", &mainPointer);
+  int a = 0;
+  int b = 0;
+  int p[4] = {0, 1, 2, 3};
+  int p2[2] = {1, 20};
+  printf("a & b : %p, %p\n", &a, &b);
+  printf("p: %p, %p\n", p, p + 1);
+  printf("ps: %p, %p\n", p2, p2 + 1);
   if (argc == 1) {
     readFromStdInput();
   } else {

@@ -60,4 +60,26 @@ A program's memory is made up of four kind of segments.
 |   heap    | | growth
 +-----------+
 ```
-Refs: http://www.cs.uwm.edu/classes/cs315/Bacon/Lecture/HTML/ch10s04.html
+Refs:
+
+1. http://www.cs.uwm.edu/classes/cs315/Bacon/Lecture/HTML/ch10s04.html
+2. http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap
+
+## Compiler stacks managements
+虽然 stack 的是向下生长的，地址也是随着 stack 的增长而降低。但是编译器在分配数组变量的时候是按照一块一块 stack 内存进行分配的，然后数组再在这块内存里面向上增长。
+
+```c
+int a = 0;
+int b = 0;
+int p[4] = {0, 1, 2, 3};
+int p2[2] = {1, 20};
+
+printf("a & b : %p, %p\n", &a, &b);
+printf("p: %p, %p\n", p, p + 1);
+printf("ps: %p, %p\n", p2, p2 + 1);
+
+>>
+a & b : 0x7fff5fbff634, 0x7fff5fbff630
+p: 0x7fff5fbff650, 0x7fff5fbff654
+ps: 0x7fff5fbff648, 0x7fff5fbff64c
+```
