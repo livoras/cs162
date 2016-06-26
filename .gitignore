@@ -36,3 +36,5 @@
 wc
 map
 main
+tags
+**/*.pyc
