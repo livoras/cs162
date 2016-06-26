@@ -3,9 +3,9 @@
 
 #define INIT_COUNTER(X) \
   Counter X; \
-  X.linecount = 0; \
-  X.charcount = 0; \
-  X.wordcount = 0;
+X.linecount = 0; \
+X.charcount = 0; \
+X.wordcount = 0;
 
 typedef struct {
   int linecount;
@@ -14,12 +14,16 @@ typedef struct {
   int status; // 0, 1
 } Counter;
 
+typedef int (*main_func)(int, char **);
+
 int readFromStdInput();
 int readFromFile(char *);
 int formatOutPut(Counter *, char *);
 int counting(Counter *, char);
 
 int main (int argc, char *argv[]) {
+  main_func mainPointer = &main;
+  printf("Address of Main function is %p", &mainPointer);
   if (argc == 1) {
     readFromStdInput();
   } else {
@@ -32,9 +36,9 @@ int main (int argc, char *argv[]) {
 int readFromStdInput () {
   char c;
   INIT_COUNTER(counter)
-  while (scanf("%c", &c) != EOF) {
-    counting(&counter, c);
-  }
+    while (scanf("%c", &c) != EOF) {
+      counting(&counter, c);
+    }
   formatOutPut(&counter, "");
   return 0;
 }
@@ -55,22 +59,28 @@ int readFromFile (char *filename) {
 }
 
 int counting (Counter *counter, char c) {
-    if (iswspace(c)) {
-      if (counter->status) {
-        counter->wordcount++;
-      }
-      if (c == '\n') {
-        counter->linecount++;
-      }
-      counter->status = 0;
-    } else {
-      counter->status = 1;
+  if (iswspace(c)) {
+    if (counter->status) {
+      counter->wordcount++;
     }
-    counter->charcount++;
-    return 0;
+    if (c == '\n') {
+      counter->linecount++;
+    }
+    counter->status = 0;
+  } else {
+    counter->status = 1;
+  }
+  counter->charcount++;
+  return 0;
 }
 
 int formatOutPut(Counter *counter, char *filename) {
-  printf("%d\t%d\t%d\t%s\n", counter->linecount, counter->wordcount, counter->charcount, filename);
+  printf(
+    "%d\t%d\t%d\t%s\n",
+    counter->linecount,
+    counter->wordcount,
+    counter->charcount,
+    filename
+  );
   return 0;
 }

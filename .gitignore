@@ -38,3 +38,4 @@ map
 main
 tags
 **/*.pyc
+*.swp

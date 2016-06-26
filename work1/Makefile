@@ -1,6 +1,8 @@
+CC=gcc
 CGLAGS=-Wall -g
 
-all: wc
+all:
+	$(CC) ./wc.c $(CGLAGS) -o wc
 
 clean:
 	rm -f main
