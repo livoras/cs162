@@ -83,3 +83,6 @@ a & b : 0x7fff5fbff634, 0x7fff5fbff630
 p: 0x7fff5fbff650, 0x7fff5fbff654
 ps: 0x7fff5fbff648, 0x7fff5fbff64c
 ```
+
+## 16进制和Byte
+在16进制中，每一个位都代表4个bit。所以每两位可以代表8个bit（1 byte），所以对于类似 0x12345678 数字来说，0x12|0x34|0x56|0x78 可以代表不同的内存单位里面的值。
